@@ -3,5 +3,5 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("김정모 바보")
+    return render (request,'home.html')
 # Create your views here.
