@@ -9,8 +9,28 @@
       rel="stylesheet"
     />
     <style>
+      @font-face {
+          font-family: 'Pretendard-Regular';
+          src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+          font-weight: 400;
+          font-style: normal;
+      }
+
       body{
         background-color: #F5F5F5;
+        font-family: 'Pretendard-Regular';
+      }
+
+      .navbar {
+      justify-content: flex-end;
+      }
+
+      .accordion-header button:not(.collapsed) {
+        box-shadow: rgba(241, 171, 0, 0.5);
+      }
+
+      .accordion-item .accordion-button:not(.collapsed) {
+        border: 5px solid rgba(241, 171, 0, 0.5);
       }
     </style>
   </head>
@@ -18,54 +38,48 @@
   <body>
     <!-- 전체 컨테이너 -->
     <div>
-
       <!-- 제목/네비바 -->
-      <div class="container-fluid">
-        <div>
-          <div class="col-lg-12 py-1" style="text-align: center; vertical-align: middle;">
-            <img src="../static/images/zoo.png" alt="zoo" style="height: 100px;"></img>
-            <span style="font-size: 70px; font-weight: 1000; color: #D00D17;">
-              Topic
-            </span>
+      <div class="col-lg-12 p-2 bg-white" style="text-align: center; vertical-align: middle;">
+        <img src="../static/images/zoo.png" alt="zoo" style="height: 100px;"></img>
+        <span style="font-size: 70px; font-weight: 900; color: #D00D17;">
+          Topic
+        </span>
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white px-2">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="../static/images/zoo.png" style="height: 40px;">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#album">뉴스</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">날씨</a>
+              </li>
+            </ul>
           </div>
-
-        <div style="justify-content: end;">
-          <nav class="navbar navbar-expand-lg">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-              aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">뉴스</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">날씨</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
         </div>
-      </div>
-
-      <div class="col-lg-12 py-2 text-center">
-          <h2>우리가 시간이 없지, 세상이 안궁금하냐!</h2>
-      </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="col-lg-12 py-2 text-center" >
+            <h2 style="font-weight: 700;">세상의 소식을 놓치지 않고 싶지만 바쁜 스케줄 때문에 신문을 읽을 시간이 없어요!</h2>
+        </div>
 
       <!-- 구독 -->
       <div class="row justify-content-center " style="background-color: #f1ab00;" >
         <div class="col-lg-12 py-5 text-center" style="color: white; font-weight: 500;">
           <h3>
-            세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 바쁜 게 우리 탓은 아니잖아요!</br>월/화/수/목/금 아침마다 세상 돌아가는 소식을 메일로 받아보세요.
+            세상 돌아가는 소식을 받아보고 싶지만 신문을 볼 시간이 없어요!</br>월/화/수/목/금 아침마다 세상 돌아가는 소식을 이메일로 받아보세요!
           </h3>
         </div>
-            
         <div class="col-lg-6 p-5">
-          <main class="form-signin w-100 m-auto" style="max-width: 500px; float: inline-end;">
+          <main class="form-signin w-100 m-auto" style="min-width: 300px; max-width: 500px; float: inline-end;">
             <!-- 입력 폼 -->
             <form>
               <div class="form-floating">
@@ -78,17 +92,6 @@
                 />
                 <label for="floatingInput">이메일 주소</label>
               </div>
-              <div class="form-floating">
-                <!-- 타입을 패스워드가 아니라 닉네임으로 바꿔야하나??? (체크 부탁)-->
-                <input
-                  type="password" 
-                  class="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
-                />
-                <label for="floatingPassword">닉네임</label>
-              </div>
-
               <div class="form-check text-start my-3">
                 <input
                   class="form-check-input"
@@ -100,7 +103,6 @@
                     <u>개인정보 수집·이용</u>에 동의합니다
                 </label>
               </div>
-
               <div class="form-check text-start my-3">
                 <input
                   class="form-check-input"
@@ -118,14 +120,18 @@
             </form>
           </main>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 p-5">
           <img src="../static/images/radio_penguin.png" alt="radio_penguin" width="400px">
         </div>
-    </div>
+      </div>
 
       <!--뉴스 컨테이너-->
-      <div class="album py-2">
+      <div class="album py-2" id="album">
         <div class="container">
+          <div class="mt-4">
+            뉴스 카테고리 필터?
+          </div>
+          <hr class="featurette-divider" />
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <div class="col">
               <div class="card shadow-sm" style="height: 350px;">
@@ -432,37 +438,44 @@
             </div>
           </div>
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <div>
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <a href="./developer/" style="text-decoration: none; color:black;">
+                      개발자 소개
+                    </a>
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <!-- <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 개발자 소개
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                zooTOPIC을 개발한 개발진에 대해 알고싶다면?!
+                <a  style="text-decoration: none; color:black;" href="./developer/">zooTOPIC을 개발한 개발진에 대해 알고싶다면?!</a>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
 
-      <!--FOTTER 내용들-->
-      <div class="container">
-        <footer class="py-3 my-4">
-          <!--ul로/ justify-content-center가 가르키는게 수평으로/ border-bottom은 border-bottom: 하단에 테두리를 추가/
-          pb-3: 하단 패딩(padding-bottom)을 3단위로 설정
-          mb-3: 하단 여백(margin-bottom)을 3단위로 설정-->
-          <p class="text-center justify-content-center border-bottom pb-3 mb-3">
-            (주)주토픽 / 책임자 : 김정모 / 담당자 메일주소 : am1607@naver.com
-            <br />
-            서울특별시 도봉구 창동 1-28 씨드큐브 7층 <br />
-            근무시간이 일정하지 않아 전화대신 고객센터를 이용해주세요!
-          </p>
-          <p class="text-center text-body-secondary">
-            &copy; 2024 Company, ZOOTOPIC
-          </p>
-        </footer>
-      </div>
+    </div>
+    <!--FOTTER 내용들-->
+    <div class="bg-white py-5">
+      <footer class="container">
+        <div class="text-center border-bottom" style="line-height: 2.5;">
+          (주)주토픽 / 책임자 : zooTOPIC / 담당자 메일주소 : zoo@topic.com</br>
+          서울특별시 도봉구 창동 1-28 씨드큐브 7층</br>
+          근무시간이 일정하지 않아 전화대신 고객센터를 이용해주세요!
+        </div>
+        <div class="text-center text-body-secondary">
+          &copy; 2024 Company, ZOOTOPIC
+        </div>
+      </footer>
     </div>
 
     <!-- 부트스트랩 자바스크립트 -->
