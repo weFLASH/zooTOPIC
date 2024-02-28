@@ -40,7 +40,7 @@
     <div>
       <!-- 제목/네비바 -->
       <div class="col-lg-12 p-2 bg-white" style="text-align: center; vertical-align: middle;">
-        <img src="../static/images/zoo.png" alt="zoo" style="height: 100px;"></img>
+        <img src="../static/images/zoo.png" alt="zoo" style="height: 100px;">
         <span style="font-size: 70px; font-weight: 900; color: #D00D17;">
           Topic
         </span>
@@ -75,7 +75,7 @@
       <div class="row justify-content-center " style="background-color: #f1ab00;" >
         <div class="col-lg-12 py-5 text-center" style="color: white; font-weight: 500;">
           <h3>
-            세상 돌아가는 소식을 받아보고 싶지만 신문을 볼 시간이 없어요!</br>월/화/수/목/금 아침마다 세상 돌아가는 소식을 이메일로 받아보세요!
+            세상 돌아가는 소식을 받아보고 싶지만 신문을 볼 시간이 없어요!<br>월/화/수/목/금 아침마다 세상 돌아가는 소식을 이메일로 받아보세요!
           </h3>
         </div>
         <div class="col-lg-6 p-5">
@@ -92,28 +92,93 @@
                 />
                 <label for="floatingInput">이메일 주소</label>
               </div>
-              <div class="form-check text-start my-3">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value="remember-me"
-                  id="flexCheckDefault"
-                />
-                <label class="form-check-label" for="flexCheckDefault">
-                    <u>개인정보 수집·이용</u>에 동의합니다
-                </label>
-              </div>
-              <div class="form-check text-start my-3">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value="remember-me"
-                  id="flexCheckDefault"
-                />
-                <label class="form-check-label" for="flexCheckDefault">
-                    <u>광고성 정보 수신</u>에 동의합니다
-                </label>
-              </div>
+              <!-- 개인정보 수집·이용 동의 체크박스 -->
+<div class="form-check text-start my-3">
+  <input
+      class="form-check-input"
+      type="checkbox"
+      value="remember-me"
+      id="flexCheckDefault"
+      onclick="showPrivacyModal()"
+  />
+  <label class="form-check-label" for="flexCheckDefault">
+      <u>개인정보 수집·이용</u>에 동의합니다
+  </label>
+</div>
+
+<!-- 개인정보 수집·이용 모달 -->
+<div id="privacyModal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">개인정보 수집·이용 동의</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p>(주)주토픽은 귀하의 개인 정보 보호를 존중하며, 귀하의 개인 정보를 보호하기 위해 최선을 다하고 있습니다. 이메일 주소는 회사와의 소식, 업데이트, 행사 및 프로모션과 관련된 정보를 받기 위한 용도로 사용될 수 있습니다.</p>
+              <p>동의를 선택함으로써 귀하는 회사가 귀하의 이메일 주소를 위와 같은 목적으로 사용하는 데 동의하게 됩니다. 회사는 귀하의 개인 정보를 안전하게 보호하며, 제3자에게 귀하의 정보를 전달하지 않습니다. 귀하는 언제든지 이메일 수신을 거부할 수 있으며, 이메일 내의 링크를 통해 구독을 취소할 수 있습니다.</p>
+              <p>귀하의 이메일 수집 동의에 대한 문의 사항이 있으시면 아래 연락처로 문의하십시오:</p>
+              <p>[회사명 및 연락처] (주)주토픽 02-3667-7304~5</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  function showPrivacyModal() {
+      if (document.getElementById("flexCheckDefault").checked) {
+          var privacyModal = new bootstrap.Modal(document.getElementById('privacyModal'));
+          privacyModal.show();
+      }
+  }
+</script>
+
+<div class="form-check text-start my-3">
+  <input
+      class="form-check-input"
+      type="checkbox"
+      value="receive-marketing-info"
+      id="receiveMarketingInfo"
+      onclick="showMarketingModal()"
+  />
+  <label class="form-check-label" for="receiveMarketingInfo">
+      <u>광고성 정보 수신</u>에 동의합니다
+  </label>
+</div>
+
+<!-- 광고성 정보 수신 모달 -->
+<div id="marketingModal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">광고성 정보 수신 동의</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p>(주)주토픽은 귀하의 이메일 주소를 사용하여 회사의 제품, 서비스, 행사, 특가 및 프로모션에 관한 정보를 제공할 수 있습니다.</p>
+              <p>동의를 선택함으로써 귀하는 회사가 귀하의 이메일 주소를 광고 및 마케팅 목적으로 사용하는 데 동의하게 됩니다. 회사는 귀하의 개인 정보를 안전하게 보호하며, 제3자에게 귀하의 정보를 전달하지 않습니다. 귀하는 언제든지 광고성 메시지를 거부할 수 있으며, 이메일 내의 링크를 통해 구독을 취소할 수 있습니다.</p>
+              <p>광고성 수신 동의에 대한 문의 사항이 있으시면 아래 연락처로 문의하십시오:</p>
+              <p>[회사명 및 연락처] (주)주토픽 02-3667-7304~5</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<script>
+  function showMarketingModal() {
+      if (document.getElementById("receiveMarketingInfo").checked) {
+          var marketingModal = new bootstrap.Modal(document.getElementById('marketingModal'));
+          marketingModal.show();
+      }
+  }
+</script>
+
+
               <button class="btn btn-danger w-100 py-2" type="submit">
                 뉴스레터 무료로 구독하기
               </button>
@@ -141,7 +206,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                     src="https://imgnews.pstatic.net/image/001/2024/02/27/PCM20240227000121990_P4_20240227174414164.jpg?type=w647"
                     alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/001/0014531279" style="text-decoration: none; color:black">
@@ -164,7 +229,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/009/2024/02/27/0005264752_001_20240227203500997.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/009/0005264752" style="text-decoration: none; color:black">
@@ -187,7 +252,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/015/2024/02/27/0004953566_001_20240227190203563.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/015/0004953566" style="text-decoration: none; color:black">
@@ -210,7 +275,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/008/2024/02/27/0005004806_001_20240227203301017.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/008/0005004806" style="text-decoration: none; color:black">
@@ -234,7 +299,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/009/2024/02/27/0005264730_001_20240227192801034.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/009/0005264730" style="text-decoration: none; color:black">
@@ -257,7 +322,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/016/2024/02/27/20240227050801_0_20240227210701279.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/016/0002272756" style="text-decoration: none; color:black">
@@ -280,7 +345,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/028/2024/02/27/0002678654_001_20240227201301061.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/028/0002678654" style="text-decoration: none; color:black">
@@ -303,7 +368,7 @@
                   <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/421/2024/02/27/0007378640_001_20240227192807427.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://n.news.naver.com/mnews/article/421/0007378640" style="text-decoration: none; color:black">
@@ -326,7 +391,7 @@
                     <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                       src="https://imgnews.pstatic.net/image/009/2024/02/27/0005264718_001_20240227182001028.jpg?type=w647"
                       alt="기사 사진"
-                    ></img>
+                    >
                   </a>
                 <div class="card-body">
                   <a href="https://sports.news.naver.com/news?oid=076&aid=0004114844" style="text-decoration: none; color:black">
@@ -348,7 +413,7 @@
                 <a href="https://sports.news.naver.com/news?oid=108&aid=0003217526">
                   <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                     src="https://imgnews.pstatic.net/image/108/2024/02/27/0003217526_001_20240227222301197.jpg?type=w647"
-                    alt="기사 사진"></img>
+                    alt="기사 사진">
                 </a>
                 <div class="card-body">
                   <a href="https://sports.news.naver.com/news?oid=108&aid=0003217526" style="text-decoration: none; color:black">
@@ -370,7 +435,7 @@
                 <a href="https://sports.news.naver.com/news?oid=076&aid=0004114844">
                   <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                     src="https://imgnews.pstatic.net/image/076/2024/02/27/2024022801001927200260911_20240227203405930.jpg?type=w647"
-                    alt="기사 사진"></img>
+                    alt="기사 사진">
                 </a>
                 <div class="card-body">
                   <a href="https://sports.news.naver.com/news?oid=076&aid=0004114844" style="text-decoration: none; color:black">
@@ -392,7 +457,7 @@
                 <a href="https://sports.news.naver.com/news?oid=109&aid=0005025616">
                   <img class="img-fluid" style="height: 200px; display: block; margin: auto;"
                     src="https://imgnews.pstatic.net/image/109/2024/02/27/0005025616_001_20240227160405291.jpg?type=w647"
-                    alt="기사 사진"></img>
+                    alt="기사 사진">
                 </a>
                 <div class="card-body">
                   <a href="https://sports.news.naver.com/news?oid=109&aid=0005025616" style="text-decoration: none; color:black">
@@ -421,7 +486,7 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                zooTOPIC의 새로운 기능이 업데이트 되면 공지사항을 통해 확인할 수 있어요!</br>공지사항 바로가기
+                zooTOPIC의 새로운 기능이 업데이트 되면 공지사항을 통해 확인할 수 있어요!<br>공지사항 바로가기
               </div>
             </div>
           </div>
@@ -442,7 +507,7 @@
               <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <a href="./developer/" style="text-decoration: none; color:black;">
+                    <a href="introduction.html" style="text-decoration: none; color:black;">
                       개발자 소개
                     </a>
                   </h2>
@@ -468,8 +533,8 @@
     <div class="bg-white py-5">
       <footer class="container">
         <div class="text-center border-bottom" style="line-height: 2.5;">
-          (주)주토픽 / 책임자 : zooTOPIC / 담당자 메일주소 : zoo@topic.com</br>
-          서울특별시 도봉구 창동 1-28 씨드큐브 7층</br>
+          (주)주토픽 / 책임자 : zooTOPIC / 담당자 메일주소 : zoo@topic.com<br>
+          서울특별시 도봉구 창동 1-28 씨드큐브 7층<br>
           근무시간이 일정하지 않아 전화대신 고객센터를 이용해주세요!
         </div>
         <div class="text-center text-body-secondary">
