@@ -47,7 +47,9 @@
         background-color: white;
       }   
 
-
+      #exampleModalButton {
+        border: none;
+      }
 
     </style>
   </head>
@@ -55,15 +57,16 @@
   <body>
     <!-- 전체 컨테이너 -->
     <div>
-      <!-- 제목/네비바 -->
+      <!-- 제목 -->
       <div class="col-lg-12 p-2 bg-white" style="text-align: center; vertical-align: middle;">
         <img src="../static/images/zoo.png" alt="zoo" style="height: 100px;" />
         <span style="font-size: 70px; font-weight: 900; color: #D00D17;">
           Topic
         </span>
       </div>
+      <!-- 네비바 -->
       <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white px-2">
-        <div class="container">
+        <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img src="../static/images/title.png" style="width: 100px;" />
           </a>
@@ -76,32 +79,33 @@
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#album">뉴스</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#weather">날씨</a>
-              </li>
+              </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="#notice">궁금한 것</a>
+                <a class="nav-link" href="#notice">서비스 안내</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <div class="container-fluid">
+      <div class="container-fluid p-0">
         <div class="col-lg-12 py-4 text-center">
-            <h2 class="m-0" style="font-weight: 700;">세상의 소식을 놓치지 않고 싶지만, 바쁜 스케줄 때문에 신문을 읽을 시간이 없어요!</h2>
+            <h2 class="m-0 px-4" style="font-weight: 700;">세상의 소식을 놓치지 않고 싶지만, 바쁜 스케줄 때문에 신문을 읽을 시간이 없어요!</h2>
         </div>
+      </div>
 
       <!-- 구독 -->
-      <div class="row justify-content-center align-items-center" style="background-color: #f1ab00;" >
+      <div class="container-fluid p-5" style="background-color: #f1ab00;" >
         <div class="col-lg-12 my-5 text-center" style="color: white; font-weight: 500;">
           <h3 style="line-height: 1.5;">
             세상 돌아가는 소식을 받아보고 싶지만, 신문을 볼 시간이 없어요!<br>월/화/수/목/금 아침마다 세상 돌아가는 소식을 이메일로 받아보세요!
           </h3>
         </div>
-        <div class="col-lg-6" style="display: flex; justify-content: center;">
+        <div class="row justify-content-center align-items-center">
           <!-- 입력 폼 -->
-          <main style="width: 100%; display: flex; justify-content: center;">
-            <form  style="min-width: 350px; max-width: 600px; width: 100%;">
+          <div class= "col-lg-6 p-5"  style="min-width: 350px; max-width: 500px; width: 100%">
+            <form  style="max-width: 600px; width: 100%;">
               <div class="form-floating">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="margin-bottom: 10px;" />
                 <label for="email">이메일 주소</label>
@@ -185,7 +189,29 @@
                 }
               </script>
 
-              <button class="btn btn-danger w-100 py-3" type="button" onclick="sendMessageToSQS()">뉴스레터 무료로 구독하기</button>
+              <!-- 구독하기 버튼 -->
+              <button class="btn btn-danger w-100 py-3" type="button" data-bs-toggle="modal" data-bs-target="#subscriptionModal" onclick="sendMessageToSQS()"><strong>뉴스레터 무료로 구독하기</strong></button>
+              <!-- 모달창 -->
+              <div class="modal" id="subscriptionModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">인증 메일을 확인해주세요.</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>입력하신 이메일 주소로 전송된 <strong>메일 안의 링크를 클릭</strong>하시면 인증이 완료됩니다.</p>
+                      <p>5분 정도만 기다려주시면 구독한 내용을 받아보실 수 있습니다.</p>
+                      <p>만약 수신된 메일을 찾을 수 없다면 스팸 메일함을 확인하시거나 문제가 계속되면 언제든지 페이지 우측 하단의 카카오톡 채널로 연락주세요.</p>
+                      <p>감사합니다.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="sendVerficationEmail()">확인습니다</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               <script>
                 function sendMessageToSQS() {
                     var email = document.getElementById('email').value;
@@ -215,14 +241,22 @@
                             console.log('Message sent to SQS:', data.MessageId);
                         }
                     });
-                }
-            </script>
+                  }
 
+                function sendVerficationEmail(){
+                  // close modal
+                  var myModal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
+                  myModal.hide();
+
+                  // page refresh
+                  location.reload();
+                }
+              </script>
             </form>
-          </main>
-        </div>
-        <div class="col-lg-6 p-5" style="text-align: center;">
-          <img src="../static/images/radio_penguin.png" alt="radio_penguin" style="width:100%; max-width:500px; height:auto;">
+          </div>
+          <div class="col-lg-6 p-5" style="min-width: 350px; max-width: 500px; width: 100%;">
+            <img src="../static/images/radio_penguin.png" alt="radio_penguin" style="width:100%; display: flex; justify-content: center;">
+          </div>
         </div>
       </div>
 
@@ -272,24 +306,21 @@
             // 뉴스 카드 HTML 생성
             var newsCard = `
               <div class="mb-3">
+                <a href=${link} target="_blank" style="text-decoration: none; color:black">
                   <div class="card shadow-sm" style="height: 350px;">
-                      <title>${title}</title>
-                      <rect width="100%" height="100%" filld="#55595c" />
-                      <a href=${link} target="_blank">
-                          <img class="img-fluid" style="height: 200px; display: block; padding:5px; margin:auto" src=${img} alt="기사 사진">
-                      </a>
-                      <div class="card-body">
-                          <a href=${link} target="_blank" style="text-decoration: none; color:black">
-                              <div class="card-text" style="height: 100px">${title}</div>
-                          </a>
-                          <div class="d-flex justify-content-between align-items-center">
-                              <small class="text-body-secondary">${time}</small>
-                          </div>
+                    <title>${title}</title>
+                    <rect width="100%" height="100%" filld="#55595c" />
+                      <img class="img-fluid" style="height: 200px; display: block; padding:5px; margin:auto" src=${img} alt="기사 사진">
+                    <div class="card-body">
+                      <div class="card-text" style="height: 100px">${title}</div>
+                      <div class="d-flex justify-content-between align-items-center">
+                          <small class="text-body-secondary">${time}</small>
                       </div>
+                    </div>
                   </div>
+                </a>
               </div>
             `;
-
             newsContainer.innerHTML += newsCard; // 뉴스 카드 추가
           });
         }
@@ -300,12 +331,20 @@
         };
       </script>
 
-      <!-- 날씨 -->
-      <div class="container-fluid p-5" id="weather">
-        <div class="pt-4">날씨 api로 넣을 예정</div>
-      </div>
-
+    <!-- //날씨
+    <div class="container-fluid p-5" id="weather" style="margin-top: 30px">
+      <div class="pt-4">현재 날씨</div>
       <hr class="p-1">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-6 p-5"  style="min-width: 350px; max-width: 500px; width: 100%;">
+          <div style="width: 100%; display: flex; justify-content: center;">날씨</div>
+        </div>
+        <div class="col-lg-6 p-5" style="min-width: 350px; max-width: 500px; width: 100%;">
+          <div style="width: 100%; display: flex; justify-content: center;">미세먼지</div>
+          <div style="width: 100%; display: flex; justify-content: center;">초미세먼지</div>
+        </div>
+      </div>
+    </div> -->
 
     <!-- 아코디언 -->
     <div class="pt-5" id="notice"></div>
@@ -427,7 +466,7 @@
             <div style="text-align: center; margin-bottom: 20px;">
               <a href="https://pf.kakao.com/_ZxlSaG" style="text-decoration: none; color: #D00D17; font-weight: 600;">카카오톡 채널 바로가기</a>
             </div>
-            <div style="text-align: center;">
+            <div style="text-align: center; margin-bottom: 20px;">
               <img src="../static/images/qrcode.png" />
             </div>
           </div>
