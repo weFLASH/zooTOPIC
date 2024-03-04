@@ -148,7 +148,7 @@
                 <input
                   type="email"
                   class="form-control"
-                  id="floatingInput"
+                  id="email"
                   placeholder="name@example.com"
                   style="margin-bottom: 10px"
                 />
@@ -277,8 +277,7 @@
                         type="button"
                         class="btn btn-secondary"
                         data-bs-dismiss="modal"
-                      >
-                        Close
+                      > Close
                       </button>
                     </div>
                   </div>
@@ -296,96 +295,36 @@
               </script>
 
               <!-- 구독하기 버튼 -->
-              <button
-                class="btn btn-danger w-100 py-3"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#subscriptionModal"
-                onclick="sendMessageToSQS()"
-              >
-                <strong>뉴스레터 무료로 구독하기</strong>
-              </button>
-              <!-- 모달창 -->
-              <div class="modal" id="subscriptionModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">인증 메일을 확인해주세요.</h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>
-                        입력하신 이메일 주소로 전송된
-                        <strong>메일 안의 링크를 클릭</strong>하시면 인증이
-                        완료됩니다.
-                      </p>
-                      <p>
-                        만약 수신된 메일을 찾을 수 없다면 스팸 메일함을
-                        확인하시거나 문제가 계속되면 언제든지 페이지 우측 하단의
-                        카카오톡 채널로 연락주세요.
-                      </p>
-                      <p>감사합니다.</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        onclick="sendVerficationEmail()"
-                      >
-                        확인했습니다
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+              <button class="btn btn-danger w-100 py-2" type="button" onclick="sendMessageToSQS()">뉴스레터 무료로 구독하기</button>
               <script>
                 function sendMessageToSQS() {
-                  var email = document.getElementById("email").value;
+                    var email = document.getElementById('email').value;
 
-                  // Set up AWS SDK
-                  AWS.config.update({
-                    region: "ap-northeast-2", // Set your AWS region
-                    credentials: new AWS.CognitoIdentityCredentials({
-                      IdentityPoolId:
-                        "ap-northeast-2:1be46cc2-3d14-4d13-ae3b-099579178827", // Set your Cognito Identity Pool ID
-                    }),
-                  });
+                    // Set up AWS SDK
+                    AWS.config.update({
+                        region: 'ap-northeast-2', // Set your AWS region
+                        credentials: new AWS.CognitoIdentityCredentials({
+                            IdentityPoolId: 'ap-northeast-2:1be46cc2-3d14-4d13-ae3b-099579178827' // Set your Cognito Identity Pool ID
+                        })
+                    });
 
-                  // Create an SQS service object
-                  var sqs = new AWS.SQS();
+                    // Create an SQS service object
+                    var sqs = new AWS.SQS();
 
-                  // Set up the parameters for the message
-                  var params = {
-                    MessageBody: email, // Use the email value as Message body
-                    QueueUrl:
-                      "https://sqs.ap-northeast-2.amazonaws.com/590183860160/email-sqs-ses", // Set your SQS queue URL
-                  };
+                    // Set up the parameters for the message
+                    var params = {
+                        MessageBody: email, // Use the email value as Message body
+                        QueueUrl: 'https://sqs.ap-northeast-2.amazonaws.com/590183860160/email-sqs-ses' // Set your SQS queue URL
+                    };
 
-                  // Send the message to the SQS queue
-                  sqs.sendMessage(params, function (err, data) {
-                    if (err) {
-                      console.error("Error sending message to SQS", err);
-                    } else {
-                      console.log("Message sent to SQS:", data.MessageId);
-                    }
-                  });
-                }
-
-                function sendVerficationEmail() {
-                  // close modal
-                  var myModal = new bootstrap.Modal(
-                    document.getElementById("subscriptionModal")
-                  );
-                  myModal.hide();
-
-                  // page refresh
-                  location.reload();
+                    // Send the message to the SQS queue
+                    sqs.sendMessage(params, function(err, data) {
+                        if (err) {
+                            console.error('Error sending message to SQS', err);
+                        } else {
+                            console.log('Message sent to SQS:', data.MessageId);
+                        }
+                    });
                 }
               </script>
             </form>
@@ -477,21 +416,6 @@
         };
       </script>
 
-      <!-- //날씨
-    <div class="container-fluid p-5" id="weather" style="margin-top: 30px">
-      <div class="pt-4">현재 날씨</div>
-      <hr class="p-1">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-lg-6 p-5"  style="min-width: 350px; max-width: 500px; width: 100%;">
-          <div style="width: 100%; display: flex; justify-content: center;">날씨</div>
-        </div>
-        <div class="col-lg-6 p-5" style="min-width: 350px; max-width: 500px; width: 100%;">
-          <div style="width: 100%; display: flex; justify-content: center;">미세먼지</div>
-          <div style="width: 100%; display: flex; justify-content: center;">초미세먼지</div>
-        </div>
-      </div>
-    </div> -->
-
       <!-- 아코디언 -->
       <div class="pt-5" id="notice"></div>
       <div class="container-fluid p-5" id="featured-3">
@@ -522,9 +446,7 @@
                 우리는 뉴스를 통해 세상의 다양한 이야기를 전달하고자 합니다.<br />
                 저희 플랫폼을 이용해주시는 여러분들께 감사드리며, 언제나 품질
                 높은 서비스를 제공하기 위해 노력하고 있습니다.<br />
-                이용 중 궁금하신 사항이나 개선점이 있으시면 우측 하단의<strong
-                  >카카오톡 채널</strong
-                >로 언제든지 연락 주시기 바랍니다.<br />
+                이용 중 궁금하신 사항이나 개선점이 있으시면 우측 하단의 &nbsp;<strong>카카오톡 채널</strong>로 언제든지 연락 주시기 바랍니다.<br />
                 감사합니다.
               </div>
             </div>
@@ -707,8 +629,8 @@
                   />
                 </div>
                 <a
-                  href="https://zootopic-s3.s3.ap-northeast-2.amazonaws.com/introduction.html"
-                  ><span style="font-weight: 600; color: #d00d17"
+                  href="https://zootopic-s3.s3.ap-northeast-2.amazonaws.com/introduction.html" style=" text-decoration: none;"
+                  ><span style="font-weight: 600; color: #d00d17;"
                     ><strong>개발자 소개</strong> 바로가기</span
                   ></a
                 >
